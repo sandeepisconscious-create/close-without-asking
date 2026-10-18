@@ -6,7 +6,7 @@
 
   <p>
     <a href="https://github.com/sandeepisconscious-create/close-without-asking/archive/refs/heads/main.zip">
-      <img src="https://img.shields.io/badge/Download-Extension%20ZIP%20(Latest)-FF4757?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Download Extension ZIP" />
+      <img src="https://img.shields.io/badge/Download-Extension%20ZIP%20(Latest)-007AFF?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Download Extension ZIP" />
     </a>
   </p>
 </div>
@@ -63,6 +63,8 @@ Modern web apps listen for `beforeunload` events to display exit warnings. **Clo
 
 ---
 
-## 📄 License
+## 📄 License & Credits
 
-MIT © [sandeepisconscious-create](https://github.com/sandeepisconscious-create)
+Created with ❤️ by **[Sandeep Rao](https://github.com/sandeepisconscious-create)**.
+
+Licensed under the [MIT License](LICENSE).
