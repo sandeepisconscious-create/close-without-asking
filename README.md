@@ -65,6 +65,6 @@ Modern web apps listen for `beforeunload` events to display exit warnings. **Clo
 
 ## 📄 License & Credits
 
-Created with ❤️ by **[Sandeep Rao](https://github.com/sandeepisconscious-create)**.
+Created with ❤️ by **[Sandheep Rao](https://github.com/sandeepisconscious-create)**.
 
 Licensed under the [MIT License](LICENSE).
