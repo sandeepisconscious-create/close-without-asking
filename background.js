@@ -3,19 +3,19 @@
  * 1. Automatically injects content and bridge scripts into all open tabs upon install/update.
  * 2. Updates toolbar badge indicator reflecting On/Off state.
  */
-
-const BADGE_COLOR_OFF = '#717580';
+import { EXTENSION_CONFIG } from './src/constants.js';
+import { getIsEnabled } from './src/storage.js';
 
 /**
  * Updates the action badge according to current enabled state.
  */
-async function updateBadge() {
-  const { enabled = true } = await chrome.storage.local.get('enabled');
-  if (!enabled) {
-    chrome.action.setBadgeText({ text: 'OFF' });
-    chrome.action.setBadgeBackgroundColor({ color: BADGE_COLOR_OFF });
+async function syncBadge() {
+  const isEnabled = await getIsEnabled();
+  if (!isEnabled) {
+    chrome.action.setBadgeText({ text: EXTENSION_CONFIG.BADGE.OFF_TEXT });
+    chrome.action.setBadgeBackgroundColor({ color: EXTENSION_CONFIG.BADGE.OFF_COLOR });
   } else {
-    chrome.action.setBadgeText({ text: '' });
+    chrome.action.setBadgeText({ text: EXTENSION_CONFIG.BADGE.ON_TEXT });
   }
 }
 
@@ -26,15 +26,15 @@ async function injectIntoExistingTabs() {
   try {
     const tabs = await chrome.tabs.query({ url: ['http://*/*', 'https://*/*'] });
     const injectionPromises = tabs
-      .filter((tab) => Boolean(tab.id))
+      .filter((tab) => typeof tab.id === 'number')
       .flatMap((tab) => [
         chrome.scripting.executeScript({
-          target: { tabId: tab.id, allFrames: true },
+          target: { tabId: /** @type {number} */ (tab.id), allFrames: true },
           files: ['content.js'],
           world: 'MAIN',
         }).catch(() => {}),
         chrome.scripting.executeScript({
-          target: { tabId: tab.id, allFrames: true },
+          target: { tabId: /** @type {number} */ (tab.id), allFrames: true },
           files: ['bridge.js'],
           world: 'ISOLATED',
         }).catch(() => {}),
@@ -42,23 +42,23 @@ async function injectIntoExistingTabs() {
 
     await Promise.all(injectionPromises);
   } catch (error) {
-    console.error('[CloseTab] Tab injection failed:', error);
+    console.error('[CloseTab] Existing tabs injection error:', error);
   }
 }
 
 // Lifecycle listeners
 chrome.runtime.onInstalled.addListener(() => {
-  updateBadge();
+  syncBadge();
   injectIntoExistingTabs();
 });
 
 chrome.runtime.onStartup.addListener(() => {
-  updateBadge();
+  syncBadge();
   injectIntoExistingTabs();
 });
 
 chrome.storage.onChanged.addListener((changes) => {
-  if (changes.enabled) {
-    updateBadge();
+  if (changes[EXTENSION_CONFIG.STORAGE_KEYS.ENABLED]) {
+    syncBadge();
   }
 });

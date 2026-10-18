@@ -1,14 +1,14 @@
 <div align="center">
   <img src="icons/icon128.png" alt="Close Without Asking Logo" width="96" height="96" />
   <h1>Close Without Asking</h1>
-  <p><strong>Never get trapped by "Leave site? Changes you made may not be saved" popups again.</strong></p>
-  <p><em>Close tabs instantly the moment you hit <code>⌘ + W</code> or click <code>✕</code>.</em></p>
-
   <p>
     <a href="https://github.com/sandeepisconscious-create/close-without-asking/archive/refs/heads/main.zip">
       <img src="https://img.shields.io/badge/Download-Extension%20ZIP%20(Latest)-007AFF?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Download Extension ZIP" />
     </a>
   </p>
+
+  <p><strong>Never get trapped by "Leave site? Changes you made may not be saved" popups again.</strong></p>
+  <p><em>Close tabs instantly the moment you hit <code>⌘ + W</code> or click <code>✕</code>.</em></p>
 </div>
 
 ---
